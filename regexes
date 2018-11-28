@@ -1,0 +1,363 @@
+REGULAR EXPRESSIONS REGEX
+*************************
+regular expressions are used for easy searching of data.
+instead of using if and else conditions we can search for data using regex objects.
+
+Regular Expressions(REGEX) process 
+----------------------------------
+step 1: importing the regex module
+        import re
+
+step 2: create the regex object with re.compile() function (use raw r)
+        eg: re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')
+
+step 3: Store the value returned by the re.compile() function into a variable.
+        robj=re.compile()
+
+step 4: now pass the string to be searched to the regex object's search method to produce a match object.
+        mobj=robj.search('string to be searched')
+
+step 5: once we get the match object, use the group() function to get the desired search result.
+        mobj.group() 
+
+eg:phonenum=re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')
+   result=phonenum.search('file or string')
+   print(result.group())
+
+GROUPS
+======
+
+Grouping with paranthesis
+-------------------------
+grouping the string with paranthesis so that once the match object is created, it can be grouped into different groups based on the grouping done with paranthesis.
+
+eg:phonenum=re.compile(r'(\d\d\d)-(\d\d\d-\d\d\d\d)')
+   result=phonenum.search('file or string')
+   print(result.group(1)) #displays group 1(\d\d\d)
+   print(result.group(2)) #displays group 2(\d\d\d-\d\d\d\d)
+   print(result.group(0)) #displays the whole group((\d\d\d)(\d\d\d-\d\d\d\d))
+   print(result.group())  #displays the whole group((\d\d\d)(\d\d\d-\d\d\d\d))---(default)
+
+assigning values to groups
+--------------------------
+
+a,b=mo.group()
+this assigns a to group 1 and b to the second group.
+
+use of pipes
+------------
+note: in searching values in a string using regex object, it searches from first and when found, it gets displayed.
+
+eg:sh=re.compile(r'batman|superman') 
+   sh1=sh.search('batman and superman')
+   sh2=sh.search('superman and batman')
+   sh1.group() #result is batman
+   sh2.group() #result is superman
+
+here the pipe acts as 'or' the first search keyword which matches the text is displayed.
+
+Pipes can be used to match multiple keywords
+--------------------------------------------
+eg: robj=re.compile(r'bat(mobile|man|woman|sman)')
+    mobj=robj.search('batman has a black suit')
+    mobj.group()
+result is: batman
+
+    mobj.group(1) ----this displays the keyword matched in first paranthesis group.
+    result is :man
+
+matching with ?
+----------------
+eg:robj=re.compile(r'bat(wo)?man')
+    mobj1=robj.search('batman has a black suit')
+    mobj1.group()
+result is: batman
+   mobj2=robj.search('batwoman has a black suit')
+   mobj2.group()
+result is: batwoman
+? means optional ie.matches the keyword if it is present otherwise skips.
+
+matching zero or more with star(*) OR Asterisk
+----------------------------------------------
+The * or Asterisk means zero or more 
+ie.the group preceding the star may not present or may present any number of times so searching must be done according to that.
+eg:robj=re.compile(r'bat(wo)*man')
+    mobj1=robj.search('batman has a black suit')
+    mobj1.group()
+result is: batman------------------0 instances found 
+robj=re.compile(r'bat(wo)*man')
+    mobj2=robj.search('batwowowowowowowoman has a black suit')
+    mobj2.group()
+result is:batwowowowowowowoman-----7 instances found
+
+Matching one or more with plus (+)
+----------------------------------
+here using + to match one or more instances ie.the instance that we search must be present atleast once.
+eg:robj=re.compile(r'bat(wo)+man')
+    mobj1=robj.search('batwoman has a black suit')
+    mobj1.group()
+result is: batwoman------------------1 instances found 
+robj=re.compile(r'bat(wo)+man')
+    mobj2=robj.search('batwowowowowowowoman has a black suit')
+    mobj2.group()
+result is:batwowowowowowowoman-----7 instances found
+robj=re.compile(r'bat(wo)+man')
+    mobj2=robj.search('batman has a black suit')
+    mobj2.group()
+result is:mobj2 will be None.
+
+Matching specific repititions with curly braces
+-----------------------------------------------
+using a number enclosed in curly braces after a group searchs for that group repeated n times where n is the number enclosed in curly braces.
+eg:
+(ha){3}
+result is 'hahaha'
+(ha){3,5}
+result is 'hahaha'|'hahahaha'|'hahahahaha' -------{3,5} means range 3 to 5
+eg:robj= re.compile(r'(Ha){3}')
+moobj1= robj.search('HaHaHa')
+moobj1.group()
+result is-----'HaHaHa'
+mobj2 =robj.search('Ha')
+mobj2 == None
+result is-----True
+
+Greedy and Nongreedy Matching
+------------------------------
+greedy approach
+---------------
+Python takes greedy approach by default ie, when (ha){3,5} is compiled, there are 3 possibilities
+'hahaha'|'hahahaha'|'hahahahaha'
+when the matching string contains 'hahahahaha' ie (ha){5},there are 2 other possibilities, the instances 'hahaha' and'hahahaha' can be matched but since python follows greedy approach, only the largest number in the range is considered.
+eg:robj= re.compile(r'(Ha){3}')
+moobj1= robj.search('HaHaHa')
+moobj1.group()
+result is-----'HaHaHa'
+mobj2 =robj.search('Ha')
+mobj2 == None
+result is-----True
+robj= re.compile(r'(Ha){3,5}')
+moobj1= robj.search('HaHaHaHaHa')
+moobj1.group()
+result is-----'HaHaHaHaHa'-------greedy approach
+
+Non greedy approach
+-------------------
+to force puthon to take non greedy approach, we have to use '?' symbol after the curly braces.
+eg:robj= re.compile(r'(Ha){3,5}')
+moobj1= robj.search('HaHaHaHaHa')
+moobj1.group()
+result is-----'HaHaHa'-------non-greedy approach
+
+NOTE
+****
+for mapping ?,+,* in the regex expression, use backslash (\).
+
+findall() method
+----------------
+
+search() method returns the first match from the string while the findall method of regex returns all the matches in the string.
+
+eg: for search()
+    robj=re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')
+    mobj=robj.search('444-256-4458 and 478-965-9932')
+    print(mobj)
+    result is :'444-256-4458'
+
+eg: for findall()
+    robj=re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')
+    mobj=robj.findall('444-256-4458 and 478-965-9932')
+    print(mobj)
+    result is :['444-256-4458', '478-965-9932']
+
+
+when groups are present in the regex object ie the regular expression is grouped using paranthesis,the findall method returns list of tuples.
+eg:robj=re.compile(r'(\d\d\d)-(\d\d\d)-(\d\d\d\d)')
+   mobj=robj.findall('475-586-8772 and 788-741-7777')
+   mobj.group()
+result is: [('475','586','8772'),('788','741','7777')]
+
+
+Character Classes
+*****************
+
+\d ----------------any numeric digit from 0 to 9   [0,9]
+\D ----------------any character that is not a numeric digit from 0 to 9
+\w ----------------any letter digit or underscore(word)  [a-z,A-Z,0-9]
+\W ----------------any character that is not a letter digit or underscore
+\s ----------------any space tab or newline character(space matching)
+\S ----------------any character that is not a space tab or new line
+
+
+eg:robj=re.compile(r'\d+\s\w+')
+   mobj=robj.findall('12 pens,3 pencils,5 sharpners')
+print(mobj)
+result is ['12 pens','3 pencils','5 sharpners']
+
+
+Making a negative character class using a carat sign '^'
+--------------------------------------------------------
+when we put a carat symbol in front of a regular expression, it negates the expression ie it teels the compiler to do the opposite
+eg:vowels=re.compile(r'[aeiouAEIOU]')
+   mo=vowel.findall('i am a dreamer')
+   print(mo)
+result is :['i','a','a','e','a','e']
+
+consonant=re.compile(r'^[aeiouAEIOU]')
+mo=consonant.findall('i am a dreamer')
+print(mo)
+result is : ['m','d','r','m','r']
+
+BEGINS WITH AND ENDS WITH IN REGEX (^ and $)
+---------------------------------------------
+
+if caret symbol is at the beginning of a word, the match must be at the beginning of the string and dollar sign is put at the end of the regular expression where the match must be at the end .
+if the dollar and carat symbols are put at beginning and end of an expression, then it must match the whole string.
+
+eg: beginsWith = re.compile(r'^Hello')
+beginsWith.search('Hello world!')
+<_sre.SRE_Match object; span=(0, 5), match='Hello'>
+beginsWith.search('He said hello.') == None
+True
+
+
+usages of carets and dollars
+----------------------------
+used with (r'\d$')----means ends with a number
+          (r'^\d')----means starts with a number
+          (r'^\d$')---means starts and ends with a number
+          (r'^\d+$')---means starts and ends with one or more numbers.
+
+
+WildCard Character (.)
+----------------------
+
+The dot character is called the wildcard character it matches any single character other than new line.
+eg:robj=re.compile(r'.at')
+   mo=robj.search('cat sat on a flat mat')
+   mo.group()
+ result is :['cat','sat','lat','mat']
+NOTE
+----
+the dot character mathes only a single character so use star assosiated with dot character to map or match the whole string.
+
+
+Matching everything with Dot-Star (.*)
+--------------------------------------
+
+the dot-star matches every thing because it follows greedy matching
+
+eg: robj=re.compile(r'firstname: (.*) lastname:(.*)')
+    mo=robj.search('first name: san last name: kr')
+mo.group()
+mo.group(1)
+mo.group(2)
+result is: san kr
+           san
+           kr   
+
+non greedy method
+-----------------
+by using ? after dot-star
+eg:
+robj=re.compile(r'<.*?>')
+mo=robj.search('<i am gone> with the wind>')
+mo.group()
+result is:<i am gone>
+since the < and > must be matched and as per non greedy method the shorter the better so the closest '<''>' are matched.
+
+
+Matching new lines with dot character.
+--------------------------------------
+using Dot and Star as a combination matches all characters except new line so using re.DOTALL as second arguement to re.compile() matches the new lines
+eg: robj=re.compile('.*',re.DOTALL)
+    mo=robj.search('i am santhosh.\ni am from palakkad.\ni am an engineer.')
+    mo.group()
+result is:'i am santhosh.\ni am from palakkad.\ni am an engineer.'
+
+SUMMARY
+=======
+
+
+    The ? matches zero or one of the preceding group.
+
+    The * matches zero or more of the preceding group.
+
+    The + matches one or more of the preceding group.
+
+    The {n} matches exactly n of the preceding group.
+
+    The {n,} matches n or more of the preceding group.
+
+    The {,m} matches 0 to m of the preceding group.
+
+    The {n,m} matches at least n and at most m of the preceding group.
+
+    {n,m}? or *? or +? performs a nongreedy match of the preceding group.
+
+    ^spam means the string must begin with spam.
+
+    spam$ means the string must end with spam.
+
+    The . matches any character, except newline characters.
+
+    \d, \w, and \s match a digit, word, or space character, respectively.
+
+    \D, \W, and \S match anything except a digit, word, or space character, respectively.
+
+    [abc] matches any character between the brackets (such as a, b, or c).
+
+    [^abc] matches any character that isn’t between the brackets.
+
+
+
+Case Insensitive matching
+-------------------------
+in this type of matching,we can add re.I as arguement to re.compile() so that the regular expression becomes case insensitive.
+eg: robj-re.compile(r'RoBoCOp,re.I')
+    mo=robj.search('robocop is the coolest cop')
+mo.group()
+result is: 'robocop'          
+
+Substituting Strings with SUB() method
+---------------------------------------
+substituting words in the string using sub() method the arguements in sub() method must be the word to be substituted in place of matched string/word followed by the string in which the matching must be done separated by comma.
+
+eg:
+robj=re.compile(r'agent \w+')
+mo=robj.sub('classified','agent carter is in india')
+mo.group() #or print(mo)
+result is : 'classified is in india'
+
+to show only first letter of confidential names,use regular expresion (\w)\w* use \1\2\3 as arguements of sub() method
+
+eg:robj=re.compile(r'agent (\w)\w*')
+mo=robj.sub('r\1*****','agent carter is in india')
+print(mo)
+result is : 'c***** is in india'
+
+Managing Complex Regexes
+------------------------
+VERBOSE MODE
+------------
+When the regex patterns become complex ie the matchings become complex, it is hard to use regular expressions and their formatting(white spaces)
+so in verbose mode white spaces are ignored and is easier to carryout complex matching expressions.
+
+eg:import re
+robj=re.compile(r'''(
+(\d{3}|\(\d{3}\))?
+(\s|-|\.)?
+\d{3}
+(\s|-|\.)?
+\d{4}
+(\s*(ext|x|ext.)\s*{2,5})?
+)''',re.VERBOSE)
+
+
+Combining RE.IGNORECASE,RE.DOTALL and RE.VERBOSE
+------------------------------------------------
+all the 3 can be combined using pipes 
+since re.compile() can only take one arguement at a time we use pipes
+
+eg:
+robj=re.compile('killbox',re.IGNORECASE|re.DOTALL|re.VERBOSE)      
