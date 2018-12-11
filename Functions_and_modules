@@ -1,0 +1,155 @@
+Functions and modules:
+**********************
+
+Functions
+*********
+The concept is Code reuse. 
+
+function syntax:
+----------------
+
+def func-name(arguements):           # function definition    
+   statements
+   return value                      # value to be returned (optional)
+
+func-name(value to pass)             # function call
+
+eg:
+
+def add(x,y):
+   return(x+y)
+
+add(5,4)
+
+res-->
+9
+
+initializing things inside a function
+-------------------------------------
+
+variables must be initialized inside the function definition block or when using global variables, use global keyword to access them otherwise it will lead to program error.
+Always call a function only after its definition otherwise it will not work.
+
+NOTE: do not write code inside a function definition after the return statement because once the return statement is executed, the execution will exit the function block and move on to next line of code so the code written inside the function definition after the return statement will be skipped.
+And also the return statement cannot be used outside the function definition block.
+
+eg:
+def add_numbers(x, y):
+  total = x + y
+  return total
+  print("This won't be printed")
+
+print(add_numbers(4, 5))
+
+res-->
+9
+
+Comments and docstrings
+-----------------------
+
+Comments in python are written to help the coder to understand about the block or line of code to which it is given.The comment won't make any change to the code.Comment is given by writing the details to be written after a hash symbol '#'.
+In python, there are only single line comments and no multiline comments.
+
+eg:
+
+def add(x,y):            #funcrion definition
+   return(x+y)           #return statement
+
+add(5,4)                 #function call
+
+
+Docstrings in python are written to give more details about the code written.It is written between 3 inverted commas at start and end which is written after a function definition.
+
+eg:
+def add(x,y):  
+   """ 
+   function to 
+   add two
+   numbers
+   """          
+   return(x+y)           
+add(5,4)  
+
+NOTE: the docstrings will be retained throughout runtime so user can see these comments at runtime.
+
+Functions and objects
+---------------------
+
+Functions assigned to variables
+-------------------------------
+
+Similar to variables, functions can also be assigned to variables.
+
+eg:
+
+def add(x,y):
+   return(x+y)
+logical=add
+logical(5,4)               
+
+NOTE: here in the above example,the function add is assigned to variable logical and then logical can be usd to call the function add.
+
+Functions as Arguements of other Functions
+------------------------------------------
+Giving a function as arguement to another function.
+
+eg:
+
+def add(x,y):
+   return (x+y)
+def addtwice(func,x,y):
+   return func(func(x,y),func(x,y))
+
+dump=addtwice
+print(dump(add,5,4))
+
+MODULES
+-------
+
+Modules are pieces of codes which can be imported and used in our program.
+
+There are 3 types of modules
+-> those we write
+-> preinstalled modules in python
+-> third-party modules
+  
+eg: 
+
+import random                             #importing the random module 
+
+for var in range(5):
+   dump=random.randint(1,6)               #randint() function in random module is used here to obtain random value from 1 and 6 (NOTE 6 included)
+   print(dump)
+
+
+Importing only needed methods from modules
+------------------------------------------
+
+Using from keyword, we can import specific methods from modules.
+
+eg:
+from math import pi
+print(pi)
+
+Importing methods or objects with a different name
+--------------------------------------------------
+Using 'as' keyword, methods or objects can be imported with different name.
+eg:
+from math import sqrt as square_root
+print(square_root(25))
+
+Standard Library and Pip
+------------------------
+Standard libraries are the modules which are preinstalled in python.
+eg: random,socket,multiprocessing,re,datetime,math etc.
+(For detailed notes refer Standard library functions note.)
+
+
+Third-party modules
+-------------------
+
+Third-party modules are present in Python Package Index(PyPI).
+'pip' is the tool that is used to install the third party modules.
+Syntax:
+pip install <package_name>
+

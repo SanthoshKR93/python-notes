@@ -1,0 +1,340 @@
+Intro
+*****
+Python is a high level programming language.
+versions 2x and 3x.
+default datatype in version 2.x is 'int'
+eg: 4/2=2
+default datatype in version 3.x is 'float'
+eg: 4/2=2.0 
+
+Input and Output
+****************
+print() and input() functions are used to print and read in python.
+print("hello world!")
+
+input("what is your name")
+
+Type Conversion
+***************
+convert between types string float and int using the following functions
+str()
+float()
+int()
+
+Variables
+*********
+A variable allows you to store a value by assigning it to a name, which can be used to refer to the value later in the program. 
+
+eg: x=7
+    print(x)
+    res---> 7
+
+note: a single variable can be assigned with different datatypes but one at a time ie. a variable 'x' which was assigned string datatype can be later reassigned as integer.
+
+Since python is case sensitive, variable names are case sensitive.
+eg: variables apple and AppLE are different.
+
+In-Place operators
+******************
+eg: x=x+3 is same as x+=3
+
+this can also be used on strings 
+note: python does not have increment and decrement operators like ++ and -- instead they use in-place operators
+
+
+using IDLE
+**********
+
+save python programs with '.py' extension.
+run using the command.
+python3 <pgm.py> from terminal or just the name of file inside python console.
+
+
+
+
+-> Control Sructures
+   *****************
+
+Assignment and comparison operators
+***********************************
+Assignment operator
+-------------------
+'=' assignment operator which assigns values to variables.
+
+Comparison operators
+--------------------
+'==' comparison operator compares the values on both sides and prints whether the comparison is True or False (Boolean)
+'!='not equal to
+'>' greater than
+'<' less than
+'>='greater than or equal to
+'<=' lesser than or equal to
+
+eg: 
+x=True
+print(x)
+result--->True
+
+2==3
+result---> False
+
+2>3
+result---> False
+
+12<3
+result---> False
+
+2!=2
+result---> False
+
+
+if Statements
+*************
+
+Syntax:
+if condition:
+   statements
+
+eg:
+if 2>1:
+   print("hello world")
+
+Nested if
+---------
+
+eg:
+if state='kerala':
+   print("KL")
+   if district='palakkad'
+      print"9"
+
+else statements
+***************
+
+if 2>3:
+   print("found")
+else:
+   print("not found")
+
+elif Statements
+***************
+
+elif is short for elseif and it has an else statement at the end.
+
+num = 7
+if num == 5:
+   print("Number is 5")
+elif num == 11:
+   print("Number is 11")
+elif num == 7:
+   print("Number is 7")
+else:
+   print("Number isn't 5, 11 or 7")
+
+
+Boolean logic
+*************
+Boolean has 2 values True and False
+there are three boolean operators:
+AND :For AND to be True, both the result of the expression must be True.
+OR : for OR to be True , any one of the two conditions must be true
+NOT: Not negates the condition and returns True if result is false and viceversa.
+
+
+While loops
+***********
+The While loop executes as long as the condition given is true.
+Syntax:
+while condition:
+   statements
+
+eg:
+i=0
+while i<5:
+   print("hello world")
+   i=i+1
+Break and Continue statements
+-----------------------------
+break statement when used inside while loop breaks the execution and exits the loop.
+continue statement when used inside while loop skips the current iteration and moves on to the next.
+
+eg:
+
+i=0
+while i<5:
+   print(i)
+   if i==3:
+      break
+   i=i+1
+res--> 
+0
+1
+2
+3
+
+i=0
+while i<5:
+   i=i+1
+   if i==2:
+      continue
+   print(i)
+   if i==4:
+      break
+
+res--> 
+1
+3
+4
+
+Lists
+*****
+lists are objects in python used to store an indexed list of items.the elements of the list are enclosed in square brackets and separated by a comma.
+list=[1,2,3,]
+the index of the list starts from zero.
+
+empty list ---[]
+
+list can have items of different datatype and lists can have lists inside them to represent 2d arrays since python doesnt support multidimensional arrays.
+eg: list=["str",[1,2,3],4]
+    print(list(0))
+res--> str
+
+List Ops
+********
+Reassigning a value at an index:
+--------------------------------
+eg:
+list=[1,2,3,4]
+list[2]=5
+print(list)
+res--> [1,2,5,4]
+
+addition and multiplication operations on lists
+-----------------------------------------------
+eg:
+num=[1,2,3,4]
+print(num+[5,6,7,8])
+print(num*3)
+
+res--> [1,2,3,4,5,6,7,8]
+       [1,2,3,4,1,2,3,4,1,2,3,4]
+
+In and Not operations on list
+-----------------------------
+in and not returns boolean result ie in checks whether a value is present in a list and not when used with in checks whether a value is not present in the list.
+eg:
+list=[1,2,3,4]
+print(1 in list)
+print(not 5 in list)
+print(5 not in list)
+
+res-->True
+      True
+      True
+
+List Functions
+**************
+There are methods and functions.Functions are standalone codes written outside of classes and methods are functions inside classes so functions can be accessed directly by calling them with values as its parameters while methods are used by combining the file on which the operation has to be done with a dot operator and the method name.
+eg:
+Functions:
+len(list)- to get the length of the list
+max(list)- to get the max value in list
+min(list)- to get min value in list
+
+Methods:
+list.append(obj)-append method is used to append values to the end of the list
+list.insert(index,obj)-insert method is used to insert values to list at any index position specified.
+list.remove(obj)- remove method is used to remove values from list.
+list.count(obj)-count method is used to count the occurances of a value in a list.
+list.reverse()-reverse method is used to reverse the values of a list.
+list.index(obj)-index method is used to get the index of a value in a list
+
+eg:
+list1=[1,2,3,4,5,5,5]
+print(len(list1))
+print(max(list1))
+print(min(list1))
+list1.append(6)
+print(list1)
+list1.insert(1,7)
+print(list1)
+list1.remove(6)
+print(list1)
+print(list1.count(5))
+list1.reverse()
+print(list1)
+print(list1.index(5))
+
+res-->
+7
+5
+1
+[1, 2, 3, 4, 5, 5, 5, 6]
+[1, 7, 2, 3, 4, 5, 5, 5, 6]
+[1, 7, 2, 3, 4, 5, 5, 5]
+3
+[5, 5, 5, 4, 3, 2, 7, 1]
+0
+
+
+Range
+*****
+The range function creates a range object containing the values between the specified ranges and if the starting value/arguement is not specified, it is taken as '0' by default.
+to obtain list of the values, list(<rangefunction(arguement)>) is used.
+
+syntax:
+print(list(range(value)))
+
+eg:
+print(list(range(10)))
+print(list(range(0,10)))
+print(list(range(2,10)))
+
+res-->
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[2, 3, 4, 5, 6, 7, 8, 9]
+
+The range function can take a third arguement which represents the interval.this value must be an integer.this value decides on what intervals must the sequence be created.
+
+syntax:
+list(range(startingvalue,endingvalue,interval))
+
+eg:
+print(list(range(0,10,2)))
+
+res-->
+[0, 2, 4, 6, 8]
+
+
+For Loop
+*********
+The for loop in python is like foreach loop in other languages which iterates through a given set of values and executes the following statements in its block.
+
+Syntax:
+
+for itervariable in searchcontent:
+   statements
+
+
+eg:
+list1=['cat','dog','frog','rabbit']
+for animal in list1:
+   print(animal)
+
+The for loop here iterates through the list 'list1' one value at a time in each iteration and prints the value.
+
+Using for loop with range function:
+
+syntax:
+for itervariable in range(arguement):
+   statements
+
+eg:
+for i in range(10):
+   print(i)
+
+
+
+
+
